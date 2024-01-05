@@ -1,0 +1,20 @@
+-name: Postman test
+on: [push]
+
+steps:
+jobs:
+run-postman-test:
+runs-on: ubuntu latest
+
+ -name: Checkout repository
+ uses: actions/checkout@v4
+
+ -name: Set up Node.js
+uses: actions/Setup-node@v4
+with:
+Node-version: '18'
+-name: Install Newman
+run: npm install -g newman
+
+- name: Run postman test
+run: newman run postman_tests/Books.postman_collection.json -e postman_tests/test.postman_environment.json
